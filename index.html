@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toggle Sidebar</title>
+
+    <style>
+        body.overlay {
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .sideNav {
+            height: 100vh;
+            width: 0;
+            position: fixed;
+            z-index: 99;
+            top: 0;
+            right: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+        }
+
+        .sideNav a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 25px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sideNav a:hover {
+            color: #f1f1f1;
+        }
+
+        .sideNav .close-btn {
+            position: absolute;
+            top: 0;
+            left: 0;
+            font-size: 36px;
+        }
+
+        @media screen and (max-height: 450px) {
+            .sideNav {
+                padding-top: 15px;
+            }
+
+            .sideNav a {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+
+<body id="body">
+
+
+    <!-- sidebar -->
+    <h2>Toggle sidebar</h2>
+
+    <span id="sidebarOpenButton" style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776</span>
+
+    <div id="toggleSidebar" class="sideNav">
+        <a href="javascript:void(0)" class="close-btn" onclick="closeNav()">&times;</a>
+        <a href="#">About</a>
+        <a href="#">Services</a>
+        <a href="#">Clients</a>
+        <a href="#">Contact</a>
+    </div>
+    <!--/ sidebar -->
+
+
+
+    <script>
+        function openNav() {
+            document.getElementById("toggleSidebar").style.width = "350px";
+            document.getElementById("body").classList.add("overlay");
+        }
+
+        function closeNav() {
+            document.getElementById("toggleSidebar").style.width = "0";
+            document.getElementById("body").classList.remove("overlay");
+        }
+
+
+        // code for closing the dropdown when we click outside the dropdown
+        document.addEventListener('click', function (event) {
+            let clickedElement = event.target;
+            let sidebar = document.getElementById('toggleSidebar');
+            // let sidebarOpenButton = document.getElementById('sidebarOpenButton');
+
+            // check if the clicked element is not inside the sidebar or the open button
+            if (!sidebar.contains(clickedElement) && clickedElement !== sidebarOpenButton) {
+                closeNav(); // close the sidebar
+            }
+        });
+    </script>
+
+
+</body>
+
+</html>
